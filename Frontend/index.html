@@ -1,0 +1,23 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FitTrack</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>FitTrack</h1>
+  <p>Your ultimate fitness companion</p>
+
+  <script src="js/utils.js"></script>
+  <script>
+    // If token exists → go to dashboard, else login
+    if (getToken()) {
+      redirectToDashboard();
+    } else {
+      redirectToLogin();
+    }
+  </script>
+</body>
+</html>

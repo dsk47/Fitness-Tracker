@@ -1,0 +1,68 @@
+<!-- frontend/workouts.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Workouts</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <a href="dashboard.html">Dashboard</a> |
+    <a href="workouts.html">Workouts</a> |
+    <a href="metrics.html">Metrics</a> |
+    <a href="diet.html">Diet</a> |
+    <a href="analytics.html">Analytics</a> |
+    <a href="guided.html">Guided</a> |
+    <a href="reminders.html">Reminders</a> |
+
+    <button onclick="logout()">Logout</button>
+  </nav>
+  <hr />
+
+  <div class="card">
+  <h1>Workouts</h1>
+  <div class="two-column">
+    <div>
+      <form id="workoutForm">
+        <label>Type:</label>
+        <select id="workoutType">
+          <option value="">Select type</option>
+          <option value="Cardio">Cardio</option>
+          <option value="Strength">Strength</option>
+          <option value="Flexibility">Flexibility</option>
+          <option value="HIIT">HIIT</option>
+        </select>
+
+        <label>Name:</label>
+        <input id="workoutName" placeholder="e.g., Morning Run" />
+
+        <label>Duration (mins):</label>
+        <input id="workoutDuration" type="number" />
+
+        <label>Calories:</label>
+        <input id="workoutCalories" type="number" />
+
+        <label>Steps:</label>
+        <input id="workoutSteps" type="number" />
+
+        <button type="submit" class="button-primary">Add Workout</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Quick Suggestions</h2>
+      <p style="font-size:13px;margin-bottom:6px;">Click a tag to autofill name & type.</p>
+      <div id="workoutSuggestions" class="suggest-grid"></div>
+    </div>
+  </div>
+
+  <h2>Recent Workouts</h2>
+  <div id="workoutList"></div>
+</div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/workouts.js"></script>
+</body>
+</html>

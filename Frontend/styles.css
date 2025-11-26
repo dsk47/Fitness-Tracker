@@ -1,0 +1,490 @@
+/* =========================
+   GLOBAL RESET & BASE
+   ========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #dbeafe 0, #eff6ff 45%, #f9fafc 100%);
+  color: #0f172a;
+  line-height: 1.5;
+}
+
+/* Utility container if you ever want to wrap things */
+.page {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+/* =========================
+   APP LAYOUT (PAGES WITH NAV)
+   ========================= */
+body:has(nav) {
+  min-height: 100vh;
+  padding-bottom: 32px;
+}
+
+/* Top navigation bar */
+nav {
+  max-width: 1160px;
+  margin: 16px auto 0;
+  padding: 10px 16px;
+  background: #0f172a;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.45);
+}
+
+nav a {
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #e5e7eb;
+  white-space: nowrap;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+    transform 0.1s ease;
+}
+
+nav a:hover {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(96, 165, 250, 0.9);
+  transform: translateY(-1px);
+}
+
+/* Add class="active-tab" in HTML for current page */
+nav a.active-tab {
+  background: #3b82f6;
+  border-color: #60a5fa;
+  color: #f9fafb;
+}
+
+/* Logout button on the right */
+nav button,
+nav .logout-btn {
+  margin-left: auto;
+  background: #ef4444;
+  color: #f9fafb;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+nav button:hover,
+nav .logout-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(248, 113, 113, 0.5);
+}
+
+hr {
+  margin: 6px 0 0;
+  border: none;
+  height: 0;
+}
+
+/* =========================
+   HEADINGS & PAGE STRUCTURE (APP PAGES)
+   ========================= */
+
+/* Main page title under nav (dashboard, analytics, metrics, guided, etc.) */
+body:has(nav) > h1 {
+  max-width: 1160px;
+  margin: 24px auto 12px;
+  padding: 0 16px;
+  font-size: 28px;
+  color: #0f172a;
+  text-align: left;
+  letter-spacing: 0.02em;
+}
+
+/* Subheadings when directly under body (like in metrics page) */
+body:has(nav) > h2 {
+  max-width: 1160px;
+  margin: 12px auto 8px;
+  padding: 0 16px;
+  font-size: 20px;
+  color: #0f172a;
+  text-align: left;
+}
+
+/* =========================
+   GENERIC CARD STYLE
+   ========================= */
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px 22px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
+  margin: 20px auto;
+  max-width: 1160px;
+}
+
+/* Headings inside cards should be left-aligned */
+.card h1,
+.card h2 {
+  text-align: left;
+  margin-top: 0;
+}
+
+/* =========================
+   DASHBOARD / ANALYTICS / GUIDED
+   (sections directly under body)
+   ========================= */
+
+/* Make each section under h1 look like a card */
+body:has(nav) > section {
+  max-width: 1160px;
+  margin: 0 auto 16px;
+  padding: 18px 20px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+}
+
+/* =========================
+   METRICS PAGE (special case: form + list)
+   ========================= */
+body:has(nav) > form#metric-form {
+  max-width: 1160px;
+  margin: 0 auto 16px;
+  padding: 18px 20px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+}
+
+body:has(nav) > ul#metric-list {
+  max-width: 1160px;
+  margin: 8px auto 0;
+  padding: 0 16px 8px;
+  list-style: none;
+}
+
+/* =========================
+   FORMS (GLOBAL)
+   ========================= */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background: #f9fafb;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease,
+    transform 0.05s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Primary action buttons */
+.button-primary,
+button[type="submit"] {
+  background: #3b82f6;
+  color: #f9fafb;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 6px;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.16s ease, transform 0.1s ease, box-shadow 0.16s ease;
+}
+
+.button-primary:hover,
+button[type="submit"]:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+
+/* =========================
+   TWO-COLUMN LAYOUT
+   (used in workouts, diet, reminders cards)
+   ========================= */
+.two-column {
+  display: grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: flex-start;
+}
+
+/* inner cards inside two-column should not re-center full width */
+.two-column .card {
+  margin: 0;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.1);
+}
+
+/* =========================
+   LIST ITEMS (workouts / meals / reminders / metrics)
+   ========================= */
+.list-item {
+  position: relative;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.list-item small {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* small delete / action button inside list items */
+.list-item button {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  border: none;
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-size: 11px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.list-item button:hover {
+  background: #fecaca;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   HEATMAP (analytics)
+   ========================= */
+.heatmap-row {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-start;
+  margin-top: 6px;
+}
+
+.heatmap-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: #e5e7eb;
+  box-shadow: inset 0 0 0 1px #e5e7eb;
+  transition: background 0.16s ease, transform 0.08s ease;
+}
+
+.heatmap-box.active {
+  background: #22c55e;
+  box-shadow: inset 0 0 0 1px #16a34a;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   SUGGESTION TAGS / CARDS
+   (workouts + diet)
+   ========================= */
+.tag-pill {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 2px 4px 2px 0;
+}
+
+.suggest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.suggest-card {
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  font-size: 13px;
+  transition: border-color 0.16s ease, background 0.16s ease, transform 0.08s ease,
+    box-shadow 0.16s ease;
+}
+
+.suggest-card:hover {
+  border-color: #60a5fa;
+  background: #eff6ff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+}
+
+.suggest-card-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* =========================
+   AUTH / LANDING PAGES
+   (pages WITHOUT nav: index, login, register)
+   ========================= */
+body:not(:has(nav)) {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: radial-gradient(circle at top, #bfdbfe 0, #eff6ff 40%, #f9fafb 100%);
+}
+
+/* Main title (FitTrack, Login, Register) */
+body:not(:has(nav)) > h1 {
+  font-size: 32px;
+  margin: 0 0 8px;
+  text-align: center;
+  color: #0f172a;
+}
+
+/* Subtitle paragraph (index.html tagline, login/register text) */
+body:not(:has(nav)) > p {
+  margin: 0 0 18px;
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Login / Register forms */
+body:not(:has(nav)) > form {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 22px 24px 26px;
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.28);
+}
+
+/* Links under auth forms */
+body:not(:has(nav)) > form + p {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+/* =========================
+   REMINDERS PAGE EXTRA TEXT
+   ========================= */
+.reminder-note {
+  font-size: 13px;
+  color: #6b7280;
+  text-align: center;
+  margin-top: -4px;
+  margin-bottom: 10px;
+}
+
+/* =========================
+   UTILITIES
+   ========================= */
+.text-center {
+  text-align: center;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 900px) {
+  nav {
+    border-radius: 18px;
+  }
+
+  nav a {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  nav button,
+  nav .logout-btn {
+    padding: 7px 14px;
+    font-size: 12px;
+  }
+
+  .two-column {
+    grid-template-columns: 1fr;
+  }
+
+  body:has(nav) > h1 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    margin: 16px 10px;
+    padding: 16px 14px;
+  }
+
+  body:has(nav) > section {
+    margin: 12px 10px;
+    padding: 14px 12px;
+  }
+
+  body:has(nav) > form#metric-form {
+    margin: 12px 10px;
+    padding: 14px 12px;
+  }
+}

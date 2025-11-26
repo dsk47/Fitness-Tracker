@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Diet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <a href="dashboard.html">Dashboard</a> |
+  <a href="workouts.html">Workouts</a> |
+  <a href="metrics.html">Metrics</a> |
+  <a href="diet.html">Diet</a> |
+  <a href="analytics.html">Analytics</a> |
+  <a href="guided.html">Guided</a> |
+  <a href="reminders.html">Reminders</a> |
+
+  <button onclick="logout()">Logout</button>
+</nav><hr />
+
+<div class="card">
+  <h1>Diet Plan</h1>
+  <div class="two-column">
+    <div>
+      <form id="mealForm">
+        <label>Meal Type:</label>
+        <select id="mealType">
+          <option value="Breakfast">Breakfast</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Snack">Snack</option>
+          <option value="Dinner">Dinner</option>
+        </select>
+
+        <label>Food Name:</label>
+        <input id="foodName" placeholder="e.g., Idli" />
+
+        <label>Calories:</label>
+        <input id="foodCalories" type="number" />
+
+        <button type="submit" class="button-primary">Add Meal</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Suggested Foods</h2>
+      <p style="font-size:13px;margin-bottom:6px;">Click to autofill food & calories.</p>
+      <div id="foodSuggestions" class="suggest-grid"></div>
+    </div>
+  </div>
+
+  <h2>Today's Meals</h2>
+  <div id="mealList"></div>
+
+  <h2>Daily Total</h2>
+  <p id="dailyTotal"></p>
+</div>
+
+
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/diet.js"></script>
+
+</body>
+</html>

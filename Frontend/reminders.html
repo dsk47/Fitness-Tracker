@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reminders - Fitness Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="js/utils.js" defer></script>
+  <script src="js/reminders.js" defer></script>
+</head>
+<body>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="workouts.html">Workouts</a>
+    <a href="metrics.html">Metrics</a>
+    <a href="diet.html">Diet</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="guided.html">Guided</a>
+    <a href="reminders.html">Reminders</a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </nav>
+
+  <div class="page">
+    <h1>Reminders</h1>
+
+    <div class="card two-column">
+      <div>
+        <h2>Create Reminder</h2>
+        <form id="reminderForm">
+          <label>Title:</label>
+          <input id="remTitle" placeholder="Evening workout" />
+
+          <label>Date:</label>
+          <input id="remDate" type="date" />
+
+          <label>Time:</label>
+          <input id="remTime" type="time" />
+
+          <label>Type:</label>
+          <select id="remType">
+            <option value="general">General</option>
+            <option value="guided-session">Guided Session</option>
+          </select>
+
+          <button type="submit" class="button-primary">Save Reminder</button>
+        </form>
+      </div>
+
+      <div>
+        <h2>Hint</h2>
+        <p style="font-size:13px;">
+          Use <b>Guided Session</b> type to remind yourself about a live / video workout
+          (for example one from the Guided page).
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Upcoming Reminders</h2>
+      <div id="reminderList"></div>
+    </div>
+  </div>
+</body>
+</html>

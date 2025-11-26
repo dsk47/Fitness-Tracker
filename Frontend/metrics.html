@@ -1,0 +1,39 @@
+<!-- frontend/metrics.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Metrics</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <a href="dashboard.html">Dashboard</a> |
+    <a href="workouts.html">Workouts</a> |
+    <a href="metrics.html">Metrics</a> |
+    <a href="diet.html">Diet</a> |
+    <a href="analytics.html">Analytics</a> |
+    <a href="guided.html">Guided</a> |
+    <a href="reminders.html">Reminders</a> |
+
+    <button onclick="logout()">Logout</button>
+  </nav>
+  <hr />
+
+  <h1>Body Metrics</h1>
+
+  <form id="metric-form">
+    <label>Date: <input type="date" id="metric-date" required /></label><br />
+    <label>Weight (kg): <input type="number" id="metric-weight" required /></label><br />
+    <label>Body Fat (%): <input type="number" id="metric-bodyfat" /></label><br />
+    <button type="submit">Save Metric</button>
+  </form>
+
+  <h2>Recent Metrics</h2>
+  <ul id="metric-list"></ul>
+
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/metrics.js"></script>
+</body>
+</html>
