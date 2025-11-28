@@ -16,8 +16,18 @@
     <a href="guided.html">Guided</a> |
     <a href="reminders.html">Reminders</a> |
 
+    <div class="profile-container" id="profileContainer">
+  <div class="profile-icon" id="profileIcon">👤</div>
+  <div class="profile-popup" id="profilePopup">
+    <h3>Your Profile</h3>
+    <p id="popupScore">Score: --</p>
+    <p id="popupWorkouts">Workouts: --</p>
     <button onclick="logout()">Logout</button>
-  </nav>
+  </div>
+</div>
+</nav>
+
+ </nav>
   <hr />
 
   <h1>Guided Workouts</h1>
@@ -35,7 +45,16 @@
   <div id="session-modal" style="display:none; border:1px solid #ccc; padding:10px;">
     <h2 id="session-title"></h2>
     <p id="session-timer"></p>
-    <iframe id="session-video" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe><br />
+    <iframe 
+      id="session-video" 
+      width="560" 
+      height="315"
+      src="" 
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+    <br>
     <button id="session-cancel">Cancel</button>
   </div>
 

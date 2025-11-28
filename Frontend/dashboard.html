@@ -15,9 +15,19 @@
     <a href="analytics.html">Analytics</a> |
     <a href="guided.html">Guided</a> |
     <a href="reminders.html">Reminders</a> |
-
+    
+    <div class="profile-container" id="profileContainer">
+  <div class="profile-icon" id="profileIcon">👤</div>
+  <div class="profile-popup" id="profilePopup">
+    <h3>Your Profile</h3>
+    <p id="popupScore">Score: --</p>
+    <p id="popupWorkouts">Workouts: --</p>
     <button onclick="logout()">Logout</button>
-  </nav>
+  </div>
+</div>
+</nav>
+
+
   <hr />
 
   <h1>Dashboard</h1>
@@ -27,37 +37,15 @@
     <p id="summary-text">Loading...</p>
   </section>
 
-  <section id="upcoming-session">
-    <h2>Upcoming Guided Session</h2>
-    <p id="upcoming-text">No upcoming session.</p>
-  </section>
+  <!-- Motivation section -->
+  <div class="card">
+    <h2>Daily Motivation</h2>
+    <p id="quoteCarousel" class="motivation-quote"></p>
+  </div>
 
   <script src="js/utils.js"></script>
   <script src="js/auth.js"></script>
-  <script>
-    requireAuth();
-
-    async function loadDashboard() {
-      try {
-        const data = await getJSON("/analytics/summary");
-        const summaryEl = document.getElementById("summary-text");
-        summaryEl.textContent =
-          `Fitness Score Today: ${data.todayScore} | ` +
-          `Workouts Today: ${data.todayWorkouts || 0}`;
-
-        // Optional: load upcoming guided session
-        const upcoming = data.upcomingRoutine;
-        const upcomingText = document.getElementById("upcoming-text");
-        if (upcoming) {
-          upcomingText.textContent =
-            `${upcoming.title} at ${upcoming.time} on ${upcoming.date}`;
-        }
-      } catch (err) {
-        alert("Failed to load dashboard: " + err.message);
-      }
-    }
-
-    loadDashboard();
-  </script>
+  <!-- NEW: dedicated dashboard script -->
+  <script src="js/dashboard.js"></script>
 </body>
 </html>

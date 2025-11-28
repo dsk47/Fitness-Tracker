@@ -44,3 +44,48 @@ function logout() {
   redirectToLogin();
 }
 window.logout = logout; // so you can call from HTML onclick
+
+/* =========================
+   PROFILE ICON POPUP LOGIC
+   ========================= */
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("profileContainer");
+  const icon = document.getElementById("profileIcon");
+  const popup = document.getElementById("profilePopup");
+
+  // If this page doesn't have the profile icon/popup, skip
+  if (!container || !icon || !popup) return;
+
+  // Toggle dropdown on icon click
+  icon.addEventListener("click", async (e) => {
+    e.stopPropagation(); // don't trigger document click
+
+    // Toggle .open class on container
+    const isOpen = container.classList.toggle("open");
+
+    // If just opened, fetch analytics and fill the small stats
+    if (isOpen) {
+      try {
+        const data = await getJSON("/analytics/summary");
+        const scoreEl = document.getElementById("popupScore");
+        const workoutsEl = document.getElementById("popupWorkouts");
+
+        if (scoreEl) {
+          scoreEl.textContent = "Score: " + (data.todayScore ?? 0);
+        }
+        if (workoutsEl) {
+          workoutsEl.textContent = "Workouts: " + (data.todayWorkouts ?? 0);
+        }
+      } catch (err) {
+        console.error("Profile popup error:", err);
+      }
+    }
+  });
+
+  // Hide dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!container.contains(e.target)) {
+      container.classList.remove("open");
+    }
+  });
+});

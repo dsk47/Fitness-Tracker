@@ -16,8 +16,18 @@
     <a href="analytics.html">Analytics</a>
     <a href="guided.html">Guided</a>
     <a href="reminders.html">Reminders</a>
-    <button class="logout-btn" onclick="logout()">Logout</button>
-  </nav>
+    <div class="profile-container" id="profileContainer">
+  <div class="profile-icon" id="profileIcon">👤</div>
+  <div class="profile-popup" id="profilePopup">
+    <h3>Your Profile</h3>
+    <p id="popupScore">Score: --</p>
+    <p id="popupWorkouts">Workouts: --</p>
+    <button onclick="logout()">Logout</button>
+  </div>
+</div>
+</nav>
+
+</nav>
 
   <div class="page">
     <h1>Reminders</h1>
@@ -48,7 +58,7 @@
       <div>
         <h2>Hint</h2>
         <p style="font-size:13px;">
-          Use <b>Guided Session</b> type to remind yourself about a live / video workout
+           Use <b>Guided Session</b> type to remind yourself about a live / video workout
           (for example one from the Guided page).
         </p>
       </div>

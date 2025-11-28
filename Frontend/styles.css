@@ -15,14 +15,34 @@ body {
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top, #dbeafe 0, #eff6ff 45%, #f9fafc 100%);
-  color: #0f172a;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #022c22;
+  /* FITNESS BACKGROUND IMAGE */
+  background-image: url("https://images.unsplash.com/photo-1599058917212-d750089bc07e");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
 }
+
+/* Soft white/green overlay so text stays readable */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(236, 253, 245, 0.92),
+    rgba(224, 242, 232, 0.96)
+  );
+  z-index: -1;
+}
+
 
 /* Utility container if you ever want to wrap things */
 .page {
-  max-width: 1160px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 24px 16px 40px;
 }
@@ -32,76 +52,82 @@ body {
    ========================= */
 body:has(nav) {
   min-height: 100vh;
-  padding-bottom: 32px;
+  padding-bottom: 40px;
 }
 
-/* Top navigation bar */
+/* =========================
+   NAVBAR
+   ========================= */
 nav {
-  max-width: 1160px;
-  margin: 16px auto 0;
-  padding: 10px 16px;
-  background: #0f172a;
+  max-width: 1200px;
+  margin: 24px auto 0;
+  padding: 16px 24px;
+  background: #064e3b; /* dark green */
   border-radius: 999px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 14px;
   flex-wrap: wrap;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.45);
+  box-shadow: 0 16px 40px rgba(4, 120, 87, 0.55);
 }
 
 nav a {
   text-decoration: none;
-  padding: 7px 14px;
+  padding: 10px 18px;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 17px;
+  font-weight: 500;
   border: 1px solid transparent;
   background: transparent;
-  color: #e5e7eb;
+  color: #ecfdf5;
   white-space: nowrap;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
-    transform 0.1s ease;
+  transition: background 0.18s ease, border-color 0.18s ease,
+    color 0.18s ease, transform 0.1s ease, box-shadow 0.18s ease;
+}
+
+/* Optional: add class="active-tab" on the current page link */
+nav a.active-tab {
+  background: #22c55e;
+  border-color: #bbf7d0;
+  color: #022c22;
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.6);
 }
 
 nav a:hover {
-  background: rgba(59, 130, 246, 0.2);
-  border-color: rgba(96, 165, 250, 0.9);
+  background: rgba(34, 197, 94, 0.18);
+  border-color: #6ee7b7;
   transform: translateY(-1px);
 }
 
-/* Add class="active-tab" in HTML for current page */
-nav a.active-tab {
-  background: #3b82f6;
-  border-color: #60a5fa;
-  color: #f9fafb;
-}
-
-/* Logout button on the right */
+/* Logout button */
 nav button,
 nav .logout-btn {
   margin-left: auto;
-  background: #ef4444;
-  color: #f9fafb;
+  background: #dc2626;
+  color: #fef2f2;
   border: none;
-  padding: 8px 18px;
+  padding: 9px 20px;
   border-radius: 999px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  transition: background 0.18s ease, transform 0.1s ease,
+    box-shadow 0.18s ease;
 }
 
 nav button:hover,
 nav .logout-btn:hover {
-  background: #dc2626;
+  background: #b91c1c;
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(248, 113, 113, 0.5);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.6);
 }
 
+/* Divider after nav is purely decorative; keep flat */
 hr {
   margin: 6px 0 0;
   border: none;
@@ -109,80 +135,78 @@ hr {
 }
 
 /* =========================
-   HEADINGS & PAGE STRUCTURE (APP PAGES)
+   HEADINGS & PAGE STRUCTURE
    ========================= */
 
-/* Main page title under nav (dashboard, analytics, metrics, guided, etc.) */
+/* Main page title under nav (Dashboard, Workouts, etc.) */
 body:has(nav) > h1 {
-  max-width: 1160px;
-  margin: 24px auto 12px;
+  max-width: 1200px;
+  margin: 28px auto 14px;
   padding: 0 16px;
-  font-size: 28px;
-  color: #0f172a;
-  text-align: left;
+  font-size: 32px;
+  font-weight: 700;
+  color: #022c22;
   letter-spacing: 0.02em;
 }
 
-/* Subheadings when directly under body (like in metrics page) */
+/* Subheadings directly under body (if any) */
 body:has(nav) > h2 {
-  max-width: 1160px;
+  max-width: 1200px;
   margin: 12px auto 8px;
   padding: 0 16px;
-  font-size: 20px;
-  color: #0f172a;
-  text-align: left;
+  font-size: 22px;
+  color: #064e3b;
 }
 
 /* =========================
-   GENERIC CARD STYLE
+   GENERIC CARD
    ========================= */
 .card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 20px 22px;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 22px;
+  padding: 22px 24px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16);
   margin: 20px auto;
-  max-width: 1160px;
+  max-width: 1200px;
+  backdrop-filter: blur(4px);
 }
 
-/* Headings inside cards should be left-aligned */
 .card h1,
 .card h2 {
-  text-align: left;
   margin-top: 0;
+  margin-bottom: 14px;
+  font-weight: 650;
+  color: #022c22;
 }
 
 /* =========================
-   DASHBOARD / ANALYTICS / GUIDED
-   (sections directly under body)
+   SECTIONS (Dashboard / Analytics / Guided)
    ========================= */
-
-/* Make each section under h1 look like a card */
 body:has(nav) > section {
-  max-width: 1160px;
-  margin: 0 auto 16px;
-  padding: 18px 20px;
-  background: #ffffff;
-  border-radius: 18px;
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+  max-width: 1200px;
+  margin: 0 auto 18px;
+  padding: 20px 22px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.16);
 }
 
 /* =========================
-   METRICS PAGE (special case: form + list)
+   METRICS PAGE (form + list)
    ========================= */
 body:has(nav) > form#metric-form {
-  max-width: 1160px;
-  margin: 0 auto 16px;
-  padding: 18px 20px;
-  background: #ffffff;
-  border-radius: 18px;
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+  max-width: 1200px;
+  margin: 0 auto 18px;
+  padding: 20px 22px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.16);
 }
 
 body:has(nav) > ul#metric-list {
-  max-width: 1160px;
-  margin: 8px auto 0;
-  padding: 0 16px 8px;
+  max-width: 1200px;
+  margin: 10px auto 0;
+  padding: 0 16px 10px;
   list-style: none;
 }
 
@@ -192,48 +216,48 @@ body:has(nav) > ul#metric-list {
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #4b5563;
+  color: #047857;
 }
 
 input,
 select,
 textarea {
   width: 100%;
-  padding: 9px 11px;
-  border-radius: 10px;
+  padding: 11px 12px;
+  border-radius: 12px;
   border: 1px solid #d1d5db;
-  font-size: 14px;
-  background: #f9fafb;
-  transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease,
-    transform 0.05s ease;
+  font-size: 15px;
+  background: #f1f5f9;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease,
+    background 0.16s ease, transform 0.06s ease;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: #22c55e;
   background: #ffffff;
-  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.4);
   transform: translateY(-1px);
 }
 
 /* Primary action buttons */
 .button-primary,
 button[type="submit"] {
-  background: #3b82f6;
-  color: #f9fafb;
+  background: #16a34a;
+  color: #f0fdf4;
   border: none;
-  padding: 10px 16px;
+  padding: 11px 20px;
   border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
   margin-top: 6px;
   align-self: flex-start;
@@ -241,31 +265,31 @@ button[type="submit"] {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  transition: background 0.16s ease, transform 0.1s ease, box-shadow 0.16s ease;
+  transition: background 0.18s ease, transform 0.1s ease,
+    box-shadow 0.18s ease;
 }
 
 .button-primary:hover,
 button[type="submit"]:hover {
-  background: #2563eb;
+  background: #15803d;
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 10px 26px rgba(21, 128, 61, 0.6);
 }
 
 /* =========================
    TWO-COLUMN LAYOUT
-   (used in workouts, diet, reminders cards)
+   (Workouts / Diet / Reminders)
    ========================= */
 .two-column {
   display: grid;
-  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+  gap: 24px;
   align-items: flex-start;
 }
 
-/* inner cards inside two-column should not re-center full width */
 .two-column .card {
   margin: 0;
-  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.15);
 }
 
 /* =========================
@@ -273,12 +297,12 @@ button[type="submit"]:hover {
    ========================= */
 .list-item {
   position: relative;
-  padding: 10px 12px;
-  border-radius: 14px;
+  padding: 11px 14px;
+  border-radius: 16px;
   background: #f9fafb;
   border: 1px solid #e5e7eb;
-  font-size: 14px;
-  margin-bottom: 8px;
+  font-size: 15px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -289,7 +313,7 @@ button[type="submit"]:hover {
   color: #6b7280;
 }
 
-/* small delete / action button inside list items */
+/* small delete button inside list items */
 .list-item button {
   position: absolute;
   right: 10px;
@@ -298,10 +322,9 @@ button[type="submit"]:hover {
   background: #fee2e2;
   color: #b91c1c;
   border-radius: 999px;
-  padding: 2px 9px;
-  font-size: 11px;
+  padding: 3px 10px;
+  font-size: 12px;
   cursor: pointer;
-  box-shadow: none;
   transition: background 0.15s ease, transform 0.05s ease;
 }
 
@@ -311,7 +334,7 @@ button[type="submit"]:hover {
 }
 
 /* =========================
-   HEATMAP (analytics)
+   HEATMAP (Analytics)
    ========================= */
 .heatmap-row {
   display: flex;
@@ -337,45 +360,45 @@ button[type="submit"]:hover {
 
 /* =========================
    SUGGESTION TAGS / CARDS
-   (workouts + diet)
+   (Workouts + Diet)
    ========================= */
 .tag-pill {
   display: inline-block;
-  padding: 3px 8px;
+  padding: 4px 9px;
   border-radius: 999px;
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: #dcfce7;
+  color: #166534;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   margin: 2px 4px 2px 0;
 }
 
 .suggest-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
 }
 
 .suggest-card {
   background: #f9fafb;
-  border-radius: 16px;
-  padding: 10px 12px;
+  border-radius: 18px;
+  padding: 10px 13px;
   border: 1px solid #e5e7eb;
   cursor: pointer;
-  font-size: 13px;
-  transition: border-color 0.16s ease, background 0.16s ease, transform 0.08s ease,
-    box-shadow 0.16s ease;
+  font-size: 14px;
+  transition: border-color 0.16s ease, background 0.16s ease,
+    transform 0.08s ease, box-shadow 0.16s ease;
 }
 
 .suggest-card:hover {
-  border-color: #60a5fa;
-  background: #eff6ff;
+  border-color: #4ade80;
+  background: #ecfdf5;
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 12px 24px rgba(22, 163, 74, 0.24);
 }
 
 .suggest-card-title {
-  font-weight: 600;
+  font-weight: 650;
   margin-bottom: 4px;
 }
 
@@ -390,51 +413,84 @@ body:not(:has(nav)) {
   align-items: center;
   justify-content: center;
   padding: 24px 16px;
-  background: radial-gradient(circle at top, #bfdbfe 0, #eff6ff 40%, #f9fafb 100%);
+  background-image: url("https://images.unsplash.com/photo-1554311884-e58fac78a7e7");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+body:not(:has(nav))::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(240, 253, 250, 0.94),
+    rgba(224, 242, 232, 0.97)
+  );
+  z-index: -1;
 }
 
 /* Main title (FitTrack, Login, Register) */
 body:not(:has(nav)) > h1 {
-  font-size: 32px;
+  font-size: 34px;
   margin: 0 0 8px;
   text-align: center;
-  color: #0f172a;
+  color: #022c22;
 }
 
-/* Subtitle paragraph (index.html tagline, login/register text) */
+/* Subtitle paragraph (index tagline, login/register text) */
 body:not(:has(nav)) > p {
-  margin: 0 0 18px;
+  margin: 0 0 20px;
   text-align: center;
-  font-size: 14px;
-  color: #6b7280;
+  font-size: 15px;
+  color: #4b5563;
 }
 
 /* Login / Register forms */
 body:not(:has(nav)) > form {
   width: 100%;
-  max-width: 420px;
-  background: #ffffff;
-  border-radius: 22px;
-  padding: 22px 24px 26px;
-  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.28);
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 24px;
+  padding: 24px 26px 28px;
+  box-shadow: 0 24px 55px rgba(15, 23, 42, 0.3);
+  backdrop-filter: blur(6px);
 }
 
 /* Links under auth forms */
 body:not(:has(nav)) > form + p {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #4b5563;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #047857;
 }
 
 /* =========================
    REMINDERS PAGE EXTRA TEXT
    ========================= */
 .reminder-note {
-  font-size: 13px;
+  font-size: 14px;
   color: #6b7280;
   text-align: center;
   margin-top: -4px;
   margin-bottom: 10px;
+}
+
+/* =========================
+   MOTIVATION CAROUSEL
+   ========================= */
+.motivation-quote {
+  text-align: center;
+  font-size: 18px;
+  font-style: italic;
+  color: #065f46;
+  margin-top: 10px;
+  padding: 14px 18px;
+  border-left: 4px solid #22c55e;
+  background: #ecfdf5;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
 }
 
 /* =========================
@@ -449,26 +505,29 @@ body:not(:has(nav)) > form + p {
    ========================= */
 @media (max-width: 900px) {
   nav {
-    border-radius: 18px;
+    border-radius: 22px;
+    justify-content: center;
   }
 
   nav a {
-    font-size: 13px;
-    padding: 6px 10px;
+    font-size: 15px;
+    padding: 8px 14px;
   }
 
   nav button,
   nav .logout-btn {
-    padding: 7px 14px;
-    font-size: 12px;
+    padding: 8px 16px;
+    font-size: 13px;
+    margin-left: 0;
+  }
+
+  body:has(nav) > h1 {
+    font-size: 26px;
+    padding: 0 14px;
   }
 
   .two-column {
     grid-template-columns: 1fr;
-  }
-
-  body:has(nav) > h1 {
-    font-size: 24px;
   }
 }
 
@@ -480,11 +539,116 @@ body:not(:has(nav)) > form + p {
 
   body:has(nav) > section {
     margin: 12px 10px;
-    padding: 14px 12px;
+    padding: 16px 14px;
   }
 
   body:has(nav) > form#metric-form {
     margin: 12px 10px;
-    padding: 14px 12px;
+    padding: 16px 14px;
   }
+
+  .motivation-quote {
+    font-size: 16px;
+  }
+}
+
+
+/* Profile Icon + Dropdown */
+.profile-container {
+  margin-left: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Circle user icon on navbar */
+.profile-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ecfdf5;
+  border: 2px solid #4ade80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  color: #065f46;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.profile-icon:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.35);
+  background: #dcfce7;
+}
+
+/* Dropdown panel under the icon */
+.profile-popup {
+  position: absolute;
+  right: 0;
+  top: 120%;              /* directly below icon */
+  width: 200px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.35);
+  padding: 12px 14px;
+  display: none;          /* hidden by default */
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 999;
+}
+
+/* Small arrow pointing to the icon */
+.profile-popup::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 16px;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 4px rgba(15, 23, 42, 0.08);
+}
+
+/* When container has .open, show dropdown */
+.profile-container.open .profile-popup {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.profile-popup h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  color: #022c22;
+}
+
+.profile-popup p {
+  margin: 2px 0;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.profile-popup button {
+  width: 100%;
+  margin-top: 10px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 7px 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.18s ease, transform 0.08s ease,
+    box-shadow 0.18s ease;
+}
+
+.profile-popup button:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(248, 113, 113, 0.65);
 }

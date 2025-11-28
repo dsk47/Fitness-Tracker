@@ -12,29 +12,58 @@ const modalCancel = document.getElementById("session-cancel");
 
 let timerInterval = null;
 
+// ---------- helper: convert YouTube URL -> embed URL ----------
+function toEmbedUrl(url) {
+  try {
+    const u = new URL(url);
+
+    // https://www.youtube.com/watch?v=VIDEO_ID
+    if (u.hostname.includes("youtube.com") && u.pathname === "/watch") {
+      const v = u.searchParams.get("v");
+      if (v) {
+        return `https://www.youtube.com/embed/v7AYKMP6rOE`;
+      }
+    }
+
+    // https://youtu.be/VIDEO_ID
+    if (u.hostname.includes("youtu.be") && u.pathname === "/watch") {
+      const v = u.pathname.replace("/", "");
+      if (v) {
+        return `https://www.youtube.com/embed/UBMk30rjy0o`;
+      }
+    }
+
+    // otherwise just return original URL
+    return url;
+  } catch (e) {
+    return url;
+  }
+}
+
+// ---------- load routines ----------
 async function loadRoutines() {
   try {
-    const data = await getJSON("/guided"); // or /routines
-    const all = data.all || data;          // adjust to your backend response
+    const data = await getJSON("/guided");   // backend: GET /api/guided
+    const all = data.all || data;           // support both {all, recommended} or plain array
     const recommended = data.recommended || [];
 
-    // Render recommended
+    // Recommended
     recommendedList.innerHTML = "";
     recommended.forEach((r) => {
       const div = document.createElement("div");
       div.innerHTML = `
-        <strong>${r.title}</strong> (${r.duration} mins, ${r.level}) 
+        <strong>${r.title}</strong> (${r.duration} mins, ${r.level})
         <button data-id="${r._id}" class="start-btn">Start</button>
       `;
       recommendedList.appendChild(div);
     });
 
-    // Render all routines
+    // All routines
     routineList.innerHTML = "";
     all.forEach((r) => {
       const div = document.createElement("div");
       div.innerHTML = `
-        <strong>${r.title}</strong> (${r.duration} mins, ${r.level}) 
+        <strong>${r.title}</strong> (${r.duration} mins, ${r.level})
         <button data-id="${r._id}" class="start-btn">Start</button>
       `;
       routineList.appendChild(div);
@@ -52,14 +81,25 @@ async function loadRoutines() {
   }
 }
 
+// ---------- start routine & play video ----------
 async function startRoutine(routineId) {
   try {
-    const r = await getJSON(`/guided/${routineId}`);
+    const r = await getJSON(`/guided/${routineId}`); // backend: GET /api/guided/:id
+
+    // clear old timer if any
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
 
     modal.style.display = "block";
     modalTitle.textContent = r.title;
-    modalVideo.src = r.videoUrl;           // Use embedded YouTube URL
-    let remaining = r.duration * 60;       // seconds
+
+    // convert to embed URL for iframe
+    modalVideo.src = toEmbedUrl(r.videoUrl);
+
+    // countdown timer
+    let remaining = (r.duration || 0) * 60; // seconds
 
     function updateTimer() {
       const mins = Math.floor(remaining / 60);
@@ -68,6 +108,7 @@ async function startRoutine(routineId) {
       remaining--;
       if (remaining < 0) {
         clearInterval(timerInterval);
+        timerInterval = null;
         finishRoutine(r);
       }
     }
@@ -75,20 +116,27 @@ async function startRoutine(routineId) {
     updateTimer();
     timerInterval = setInterval(updateTimer, 1000);
 
+    // cancel button handler
     modalCancel.onclick = () => {
-      clearInterval(timerInterval);
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
       modal.style.display = "none";
-      modalVideo.src = "";
+      modalVideo.src = "";   // stop video
+      modalTimer.textContent = "";
     };
   } catch (err) {
     alert("Failed to start routine: " + err.message);
   }
 }
 
+// ---------- log guided workout when finished ----------
 async function finishRoutine(routine) {
   alert("Session complete! Logging workout.");
   modal.style.display = "none";
   modalVideo.src = "";
+  modalTimer.textContent = "";
 
   try {
     await postJSON("/workouts", {
