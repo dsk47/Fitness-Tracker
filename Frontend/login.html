@@ -1,21 +1,54 @@
-<!-- frontend/login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Login</title>
+  <title>Login - Fitness Tracker</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Inline CSS only for the title section -->
+  <style>
+    .app-title {
+      font-size: 38px;
+      font-weight: 700;
+      color: #065f46; /* deep healthy green */
+      margin-bottom: 6px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .app-subtitle {
+      font-size: 16px;
+      color: #047857; /* medium green */
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Center the whole content */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
 </head>
+
 <body>
+
+  <!-- Website Title -->
+  <div class="app-title">FitTrack</div>
+  <div class="app-subtitle">Stay Healthy, Stay Consistent 💪</div>
+
   <h1>Login</h1>
 
   <form id="login-form">
     <label>Email:
       <input type="email" id="login-email" required />
     </label><br />
+
     <label>Password:
       <input type="password" id="login-password" required />
     </label><br />
+
     <button type="submit">Login</button>
   </form>
 
