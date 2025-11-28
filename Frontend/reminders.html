@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <title>Reminders - Fitness Tracker</title>
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- JS (order matters: utils -> auth -> reminders) -->
   <script src="js/utils.js" defer></script>
+  <script src="js/auth.js" defer></script>
   <script src="js/reminders.js" defer></script>
 </head>
 <body>
@@ -17,21 +20,17 @@
     <a href="guided.html">Guided</a>
     <a href="reminders.html">Reminders</a>
 
-    
-
-     <div class="profile-container" id="profileContainer">
-  <div class="profile-icon" id="profileIcon">👤</div>
-  <div class="profile-popup" id="profilePopup">
-    <h3>Your Profile</h3>
-    <p id="popupScore">Score: --</p>
-    <p id="popupWorkouts">Workouts: --</p>
-    <button onclick="logout()">Logout</button>
-  </div>
-</div>
-
-</nav>
-
-</nav>
+    <!-- Profile icon + popup inside nav container -->
+    <div class="profile-container" id="profileContainer">
+      <div class="profile-icon" id="profileIcon">👤</div>
+      <div class="profile-popup" id="profilePopup">
+        <h3>Your Profile</h3>
+        <p id="popupScore">Score: --</p>
+        <p id="popupWorkouts">Workouts: --</p>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
 
   <div class="page">
     <h1>Reminders</h1>
@@ -62,7 +61,7 @@
       <div>
         <h2>Hint</h2>
         <p style="font-size:13px;">
-           Use <b>Guided Session</b> type to remind yourself about a live / video workout
+          Use <b>Guided Session</b> type to remind yourself about a live / video workout
           (for example one from the Guided page).
         </p>
       </div>
